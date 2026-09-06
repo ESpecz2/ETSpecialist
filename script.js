@@ -20,10 +20,10 @@ const plans = {
     },
     lifetime: {
         id: 'lifetime',
-        name: 'Lifetime',
-        price: 77,
+        name: 'Lifetime Vault Access',
+        price: 50,
         currency: 'USD',
-        description: 'Blender Club Lifetime Membership - $77 one-time'
+        description: 'Blender Club Lifetime Vault Access - Daily full UHD content (add @username in PayPal note)'
     }
 };
 
