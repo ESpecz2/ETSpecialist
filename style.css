@@ -4,30 +4,15 @@
     box-sizing: border-box;
 }
 
-:root {
-    --barbie-pink: #FF69B4;
-    --barbie-pink-dark: #FF1493;
-    --barbie-pink-light: #FFB6C1;
-    --barbie-white: #FFFFFF;
-    --barbie-black: #000000;
-    --barbie-glitter: #FFD700;
-    --shadow-soft: 0 4px 12px rgba(255, 105, 180, 0.2);
-    --shadow-medium: 0 8px 24px rgba(255, 105, 180, 0.3);
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-    background-image:
-        radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 20%);
-    min-height: 100vh;
-    position: relative;
+    background: #000000;
+    color: #ffffff;
     overflow-x: hidden;
+    position: relative;
 }
 
+/* Pink Friday Album Inspired Background */
 body::before {
     content: '';
     position: fixed;
@@ -35,580 +20,459 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23FF69B4" fill-opacity="0.1"/></svg>');
-    opacity: 0.3;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255, 20, 147, 0.15) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.1) 0%, transparent 30%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 20, 147, 0.03) 10px,
+            rgba(255, 20, 147, 0.03) 20px
+        );
+    z-index: -2;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Sparkles Effect */
+.sparkles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: -1;
+    overflow: hidden;
+}
+
+.sparkles::before,
+.sparkles::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background:
+        radial-gradient(circle at center, #ffffff 0%, transparent 70%);
+    opacity: 0.3;
+    animation: sparkleFloat 6s ease-in-out infinite;
+}
+
+.sparkles::before {
+    top: -100px;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.sparkles::after {
+    top: 30%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes sparkleFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.4;
+    }
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
     position: relative;
     z-index: 10;
 }
 
-header {
+/* Album Cover Style */
+.album-cover {
     text-align: center;
-    padding: 60px 0 30px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 30px 30px;
+    padding: 40px 20px;
     margin-bottom: 30px;
-    box-shadow: var(--shadow-soft);
-}
-
-header h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-    background: linear-gradient(to right, #FF69B4, #FF1493, #FF69B4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -1px;
     position: relative;
 }
 
-header h1::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, #FF69B4, #FF1493);
-    border-radius: 2px;
-}
-
-.tagline {
-    font-size: 1.4rem;
-    color: #FF1493;
-    font-weight: 600;
-    max-width: 700px;
-    margin: 0 auto;
-    letter-spacing: 0.5px;
-}
-
-.hero {
-    text-align: center;
-    padding: 50px 0;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    margin: 30px 0;
-    box-shadow: var(--shadow-medium);
-    border: 2px solid rgba(255, 105, 180, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background:
-        radial-gradient(circle at 30% 30%, rgba(255, 182, 193, 0.2) 0%, transparent 30%),
-        radial-gradient(circle at 70% 70%, rgba(255, 105, 180, 0.2) 0%, transparent 30%);
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(2deg); }
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    color: #FF1493;
-    font-weight: 700;
-    position: relative;
-    display: inline-block;
-}
-
-.hero h2::after {
-    content: '✨';
-    position: absolute;
-    top: -10px;
-    right: -20px;
-    font-size: 1.5rem;
-    animation: sparkle 2s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
-.hero p {
-    font-size: 1.3rem;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-}
-
-.plans {
-    padding: 50px 0;
-}
-
-.plans h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: #FF1493;
-    font-weight: 700;
-    position: relative;
-}
-
-.plans h2::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(to right, #FF69B4, #FF1493, #FF69B4);
-    border-radius: 2px;
-}
-
-.plan-cards {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.plan-card {
-    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-    border: 3px solid transparent;
-    border-image: linear-gradient(to bottom right, #FF69B4, #FF1493) 1;
-    border-radius: 20px;
-    padding: 35px;
-    width: 300px;
-    text-align: center;
-    box-shadow: var(--shadow-medium);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-}
-
-.plan-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
-    border-image: linear-gradient(to bottom right, #FF1493, #FF69B4) 1;
-}
-
-.plan-card::before {
+.album-cover::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, #FF69B4, #FF1493);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    height: 100%;
+    background:
+        linear-gradient(135deg, #ff0080, #ff1493, #ff69b4);
+    border-radius: 20px;
+    z-index: -1;
+    box-shadow: 0 10px 30px rgba(255, 20, 147, 0.4);
+    animation: albumGlow 3s ease-in-out infinite alternate;
 }
 
-.plan-card:hover::before {
-    transform: scaleX(1);
+@keyframes albumGlow {
+    from {
+        box-shadow: 0 5px 20px rgba(255, 20, 147, 0.3);
+    }
+    to {
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+    }
 }
 
-.plan-card.featured {
-    border: 4px solid transparent;
-    border-image: linear-gradient(to bottom right, #FF69B4, #FF1493, #FF69B4) 1;
-    transform: scale(1.05);
+.album-cover h1 {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #ff69b4, #ff1493, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     position: relative;
-    z-index: 10;
-    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
 }
 
-.plan-card.featured::before {
-    background: linear-gradient(90deg, #FF69B4, #FF1493, #FF69B4, #FF1493);
-}
-
-.plan-card.featured .badge {
-    display: block;
-}
-
-.plan-card .badge {
+.album-cover h1::after {
+    content: '™';
     position: absolute;
-    top: -15px;
+    top: -10px;
     right: -15px;
-    background: linear-gradient(45deg, #FF69B4, #FF1493);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    display: none;
-    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
-    transform: rotate(5deg);
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: rotate(5deg) translateY(0px); }
-    50% { transform: rotate(5deg) translateY(-8px); }
-}
-
-.plan-card h3 {
-    font-size: 2.2rem;
-    margin-bottom: 25px;
-    color: #FF1493;
-    font-weight: 800;
-    position: relative;
-    display: inline-block;
-}
-
-.plan-card h3::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(to right, #FF69B4, #FF1493);
-    border-radius: 2px;
-}
-
-.plan-card .price {
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin: 25px 0;
-    color: #FF1493;
-    position: relative;
-    display: inline-block;
-}
-
-.plan-card .price::before {
-    content: '$';
-    font-size: 1.8rem;
-    font-weight: 600;
-    opacity: 0.8;
-    margin-right: 5px;
-}
-
-.plan-card .price span {
     font-size: 1.2rem;
-    font-weight: 500;
-    opacity: 0.7;
-    display: block;
-    margin-top: 5px;
+    color: #ffd700;
 }
 
-.plan-card .features {
-    text-align: left;
-    margin: 30px 0;
-    color: #555;
+.album-cover .tagline {
     font-size: 1.1rem;
-    line-height: 1.7;
+    line-height: 1.6;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    font-weight: 500;
 }
 
-.plan-card .features p {
-    margin: 12px 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.album-cover .tagline br {
+    display: block;
+    margin: 8px 0;
 }
 
-.plan-card .features p::before {
-    content: '💖';
-    font-size: 1.2rem;
-    width: 24px;
+/* Hero Section */
+.hero {
     text-align: center;
-    flex-shrink: 0;
-    animation: pulse 2s ease-in-out infinite;
+    margin-bottom: 30px;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+.hero h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-.select-plan {
-    background: linear-gradient(135deg, #FF69B4, #FF1493);
-    color: white;
-    border: none;
-    padding: 16px 35px;
+.hero .vault-info {
     font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 50px;
+    color: #fff0f5;
+    line-height: 1.7;
+    background: rgba(255, 20, 147, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 105, 180, 0.3);
+    display: inline-block;
+}
+
+/* Options Section */
+.options {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.options h3 {
+    font-size: 1.6rem;
+    color: #ffd700;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.option-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.option-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid transparent;
+    border-image: linear-gradient(to bottom right, #ff69b4, #ff1493) 1;
+    border-radius: 18px;
+    padding: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 6px 18px rgba(255, 105, 180, 0.3);
-    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-.select-plan:hover {
-    background: linear-gradient(135deg, #FF1493, #FF69B4);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+.option-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+    border-image: linear-gradient(to bottom right, #ff1493, #ff69b4) 1;
 }
 
-.select-plan:active {
-    transform: translateY(-1px) scale(1.03);
+.option-btn:active {
+    transform: translateY(0);
 }
 
-.select-plan::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
+.option-btn.featured {
+    border-width: 4px;
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.5);
+    transform: scale(1.02);
 }
 
-.select-plan:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-#paypal-button-container {
-    text-align: center;
-    padding: 50px 0;
-    position: relative;
-}
-
-#paypal-button-container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background:
-        radial-gradient(circle at 30% 30%, rgba(255, 182, 193, 0.1) 0%, transparent 30%),
-        radial-gradient(circle at 70% 70%, rgba(255, 105, 180, 0.1) 0%, transparent 30%);
-    animation: floatPaypal 8s ease-in-out infinite;
-    z-index: -1;
-}
-
-@keyframes floatPaypal {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(3deg); }
-}
-
-.trust {
-    text-align: center;
-    padding: 50px 0;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    margin: 40px 0;
-    box-shadow: var(--shadow-soft);
-    border: 2px solid rgba(255, 105, 180, 0.15);
-}
-
-.trust h2 {
-    font-size: 2.2rem;
-    margin-bottom: 35px;
-    color: #FF1493;
-    font-weight: 700;
-}
-
-.trust-logos {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.trust-logos div {
-    background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-    border: 2px solid transparent;
-    border-image: linear-gradient(to bottom right, #FF69B4, #FF1493) 1;
-    border-radius: 15px;
-    padding: 20px 30px;
-    font-size: 1.1rem;
-    color: #FF1493;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: var(--shadow-soft);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.trust-logos div:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.25);
-    border-image: linear-gradient(to bottom right, #FF1493, #FF69B4) 1;
-}
-
-.trust-logos div::before {
+.option-btn.featured::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, #FF69B4, #FF1493);
+    background: linear-gradient(to bottom, #ff69b4, #ff1493);
 }
 
-.trust-logos div::after {
-    content: '✨';
-    position: absolute;
-    top: -8px;
-    right: -8px;
+.option-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(to right, #ff69b4, #ff1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+    display: block;
+}
+
+.option-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff0f5;
+    text-shadow: 0 0 3px rgba(0,0,0,0.3);
+    display: block;
+}
+
+.option-desc {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.option-desc small {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #ffd700;
+}
+
+/* Call to Action */
+.call-to-action {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.paypal-section {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to bottom right, #ff69b4, #ff1493) 1;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+}
+
+.paypal-section h3 {
     font-size: 1.5rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    color: #ffd700;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
-.trust-logos div:hover::after {
-    opacity: 1;
-    animation: sparkleTrust 1.5s ease-in-out infinite;
+.paypal-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 15px 0;
+    display: block;
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+    transition: all 0.3s ease;
+    border: 2px solid #ffd700;
+    letter-spacing: 0.5px;
 }
 
-@keyframes sparkleTrust {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+.paypal-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
 }
 
+.paypal-button:active {
+    transform: translateY(0);
+}
+
+.note {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-size: 0.95rem;
+    color: #fff0f5;
+    border-left: 3px solid #ffd700;
+}
+
+.warning {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 12px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-size: 0.95rem;
+    color: #ff6b6b;
+    border-left: 3px solid #ff0000;
+    font-weight: 600;
+}
+
+/* Features Section */
+.features {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.features h3 {
+    font-size: 1.6rem;
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 20, 147, 0.1);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 105, 180, 0.2);
+}
+
+.feature-item span {
+    background: #ffd700;
+    color: #000;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 12px;
+    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
+}
+
+/* Footer */
 footer {
     text-align: center;
-    padding: 40px 0;
-    color: #555;
-    font-size: 1rem;
-    position: relative;
-    z-index: 10;
+    padding: 25px 0;
+    color: #ccc;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 105, 180, 0.2);
+}
+
+footer p {
+    margin: 8px 0;
 }
 
 footer a {
-    color: #FF1493;
-    font-weight: 600;
+    color: #ff69b4;
     text-decoration: none;
-    transition: all 0.3s ease;
-    position: relative;
 }
 
 footer a:hover {
-    color: #FF69B4;
     text-decoration: underline;
-    text-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
 }
 
-footer a::after {
-    content: '💖';
-    margin-left: 5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-footer a:hover::after {
-    opacity: 1;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    header h1 {
+/* Responsive Design */
+@media (max-width: 480px) {
+    .album-cover h1 {
         font-size: 2.8rem;
     }
 
     .hero h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
-    .plans h2 {
-        font-size: 2rem;
+    .hero .vault-info {
+        font-size: 1rem;
+        padding: 12px;
     }
 
-    .plan-cards {
-        flex-direction: column;
-        align-items: center;
+    .options h3 {
+        font-size: 1.3rem;
     }
 
-    .plan-card {
-        width: 100%;
-        max-width: 350px;
+    .option-buttons {
+        grid-template-columns: 1fr;
     }
 
-    .plan-card.featured {
-        transform: scale(1);
+    .paypal-section h3 {
+        font-size: 1.3rem;
     }
 
-    .tagline {
-        font-size: 1.2rem;
+    .features h3 {
+        font-size: 1.3rem;
     }
 
-    .hero p {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero h2 {
-        font-size: 1.6rem;
-    }
-
-    .plans h2 {
-        font-size: 1.8rem;
-    }
-
-    .plan-card {
-        padding: 25px;
-    }
-
-    .plan-card h3 {
-        font-size: 1.8rem;
-    }
-
-    .plan-card .price {
-        font-size: 2.2rem;
-    }
-
-    .select-plan {
-        padding: 14px 30px;
-        font-size: 1.1rem;
+    .feature-item {
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
 }
 
-/* Add some playful animations to the page */
-@keyframes glitter {
-    0% { background-position: 0 0; }
-    100% { background-position: 100% 100%; }
+/* Add some playful animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-/* Hidden sparkle elements for extra fun */
-.sparkle {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 1.5rem;
-    opacity: 0;
-    animation: sparkleAppear 0.5s ease-out forwards;
+.feature-item:hover {
+    animation: pulse 0.6s ease-in-out;
+    background: rgba(255, 20, 147, 0.2);
+    transform: translateY(-2px);
 }
 
-@keyframes sparkleAppear {
-    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-    30% { opacity: 1; transform: scale(1.2) rotate(15deg); }
-    100% { opacity: 0; transform: scale(0.8) rotate(360deg); }
+.option-btn:hover {
+    animation: pulse 0.6s ease-in-out;
 }
+
+/* Console log for fun (will be in script.js) */
